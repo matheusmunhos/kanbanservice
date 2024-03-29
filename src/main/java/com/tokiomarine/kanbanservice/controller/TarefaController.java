@@ -13,6 +13,7 @@ import com.tokiomarine.kanbanservice.funcionario.CreateFuncionarioDTO;
 import com.tokiomarine.kanbanservice.funcionario.Funcionario;
 import com.tokiomarine.kanbanservice.gestor.Gestor;
 import com.tokiomarine.kanbanservice.tarefa.CreateTarefaDTO;
+import com.tokiomarine.kanbanservice.tarefa.GetTarefaDTO;
 import com.tokiomarine.kanbanservice.tarefa.Tarefa;
 import com.tokiomarine.kanbanservice.tarefa.TarefaRepository;
 
@@ -32,7 +33,9 @@ public class TarefaController {
 	}
 	
 	@GetMapping("/{id}")
-	public Tarefa buscarTarefa(@PathVariable("id") Long id) {
-	    return repository.findById(id).orElse(null);
+	public GetTarefaDTO buscarTarefa(@PathVariable("id") Long id) {
+	    var tarefa = repository.findById(id).orElse(null);
+	    var tarefaResponse = new GetTarefaDTO(tarefa);
+	    return tarefaResponse;
 	}
 }

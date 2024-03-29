@@ -29,4 +29,8 @@ public class Gestor {
         this.login = dto.login();
         this.senha = dto.senha();
     }
+
+	public Gestor(Gestor gestor) {
+		
+	}
 }
