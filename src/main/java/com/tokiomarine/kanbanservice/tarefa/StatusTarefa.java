@@ -2,7 +2,7 @@ package com.tokiomarine.kanbanservice.tarefa;
 
 public enum StatusTarefa {
     DOING,
-    TO_DO,
+    ToDo,
     TESTING,
     IMPEDIMENT,
     DONE,

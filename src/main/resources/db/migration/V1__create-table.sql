@@ -23,7 +23,7 @@ CREATE TABLE tarefas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     descricao TEXT,
-    status VARCHAR(255) NOT NULL,
+    status ENUM('ToDo', 'Doing','Testing','Impediment', 'Done') DEFAULT 'ToDo',
     funcionario_id INT,
     FOREIGN KEY (funcionario_id) REFERENCES funcionarios(id)
 );

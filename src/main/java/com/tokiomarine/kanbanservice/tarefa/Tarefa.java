@@ -4,6 +4,8 @@ package com.tokiomarine.kanbanservice.tarefa;
 import com.tokiomarine.kanbanservice.funcionario.Funcionario;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +33,7 @@ public class Tarefa {
     private String titulo;
     private String descricao;
 
-    
+    @Enumerated(EnumType.STRING)
     private StatusTarefa status;
 
     @ManyToOne
