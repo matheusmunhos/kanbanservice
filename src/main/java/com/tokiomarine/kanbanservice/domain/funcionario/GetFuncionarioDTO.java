@@ -1,4 +1,4 @@
-package com.tokiomarine.kanbanservice.funcionario;
+package com.tokiomarine.kanbanservice.domain.funcionario;
 
 public record GetFuncionarioDTO(Long id, String nome, String login) {
 

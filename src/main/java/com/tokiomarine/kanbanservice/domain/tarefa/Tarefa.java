@@ -1,8 +1,8 @@
-package com.tokiomarine.kanbanservice.tarefa;
+package com.tokiomarine.kanbanservice.domain.tarefa;
 
 
-import com.tokiomarine.kanbanservice.funcionario.Funcionario;
-import com.tokiomarine.kanbanservice.funcionario.GetFuncionarioDTO;
+import com.tokiomarine.kanbanservice.domain.funcionario.Funcionario;
+import com.tokiomarine.kanbanservice.domain.funcionario.GetFuncionarioDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -40,8 +40,6 @@ public class Tarefa {
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
-    
-    private GetFuncionarioDTO getFuncionario;
 
     public Tarefa(CreateTarefaDTO dto) {
     	this.titulo = dto.titulo();

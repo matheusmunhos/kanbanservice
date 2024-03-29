@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tokiomarine.kanbanservice.funcionario.CreateFuncionarioDTO;
-import com.tokiomarine.kanbanservice.funcionario.Funcionario;
-import com.tokiomarine.kanbanservice.funcionario.FuncionarioRepository;
-import com.tokiomarine.kanbanservice.funcionario.GetFuncionarioDTO;
+import com.tokiomarine.kanbanservice.domain.funcionario.CreateFuncionarioDTO;
+import com.tokiomarine.kanbanservice.domain.funcionario.Funcionario;
+import com.tokiomarine.kanbanservice.domain.funcionario.GetFuncionarioDTO;
+import com.tokiomarine.kanbanservice.repositories.FuncionarioRepository;
 
 @RestController
 @RequestMapping("/funcionario")
@@ -28,12 +28,12 @@ public class FuncionarioController {
 		repository.save(funcionario);
 	}
 	
-//	@GetMapping("/{id}")
-//	public GetFuncionarioDTO buscarFuncionario(@PathVariable("id") Long id) {
-//	    var funcionario = repository.findById(id).orElse(null);
-//	    var funcionarioResponse = new GetFuncionarioDTO(funcionario);
-//	    return funcionarioResponse;
-//	}
+	@GetMapping("/{id}")
+	public GetFuncionarioDTO buscarFuncionario(@PathVariable Long id) {
+	    var funcionario = repository.findById(id).orElse(null);
+	    var funcionarioResponse = new GetFuncionarioDTO(funcionario);
+	    return funcionarioResponse;
+	}
 	
 	
 }

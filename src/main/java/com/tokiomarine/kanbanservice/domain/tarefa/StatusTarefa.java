@@ -1,4 +1,4 @@
-package com.tokiomarine.kanbanservice.tarefa;
+package com.tokiomarine.kanbanservice.domain.tarefa;
 
 public enum StatusTarefa {
     Doing,

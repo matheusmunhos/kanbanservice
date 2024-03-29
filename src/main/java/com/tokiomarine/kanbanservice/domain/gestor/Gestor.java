@@ -1,4 +1,4 @@
-package com.tokiomarine.kanbanservice.gestor;
+package com.tokiomarine.kanbanservice.domain.gestor;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

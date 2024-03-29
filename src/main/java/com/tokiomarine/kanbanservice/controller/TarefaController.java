@@ -1,5 +1,7 @@
 package com.tokiomarine.kanbanservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tokiomarine.kanbanservice.funcionario.CreateFuncionarioDTO;
-import com.tokiomarine.kanbanservice.funcionario.Funcionario;
-import com.tokiomarine.kanbanservice.gestor.Gestor;
-import com.tokiomarine.kanbanservice.tarefa.CreateTarefaDTO;
-import com.tokiomarine.kanbanservice.tarefa.GetTarefaDTO;
-import com.tokiomarine.kanbanservice.tarefa.Tarefa;
-import com.tokiomarine.kanbanservice.tarefa.TarefaRepository;
+import com.tokiomarine.kanbanservice.domain.tarefa.CreateTarefaDTO;
+import com.tokiomarine.kanbanservice.domain.tarefa.GetTarefaDTO;
+import com.tokiomarine.kanbanservice.domain.tarefa.Tarefa;
+import com.tokiomarine.kanbanservice.repositories.TarefaRepository;
+import com.tokiomarine.kanbanservice.service.TarefaService;
 
 @RestController
 @RequestMapping("/tarefa")
@@ -23,6 +23,9 @@ public class TarefaController {
 
 	@Autowired
 	TarefaRepository repository;
+	
+	@Autowired
+	TarefaService tarefaService;
 	
 	
 	@Transactional
@@ -32,10 +35,16 @@ public class TarefaController {
 		repository.save(tarefa);
 	}
 	
+	
 	@GetMapping("/{id}")
-	public GetTarefaDTO buscarTarefa(@PathVariable("id") Long id) {
+	public GetTarefaDTO buscarTarefa(@PathVariable Long id) {
 	    var tarefa = repository.findById(id).orElse(null);
 	    var tarefaResponse = new GetTarefaDTO(tarefa);
 	    return tarefaResponse;
 	}
+	
+	@GetMapping("/funcionario/{funcionarioId}")
+    public List<GetTarefaDTO> getTarefasDoFuncionario(@PathVariable Long funcionarioId) {
+        return tarefaService.buscarTarefasPorFuncionarioId(funcionarioId);
+    }
 }

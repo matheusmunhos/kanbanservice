@@ -1,6 +1,6 @@
-package com.tokiomarine.kanbanservice.tarefa;
+package com.tokiomarine.kanbanservice.domain.tarefa;
 
-import com.tokiomarine.kanbanservice.funcionario.Funcionario;
+import com.tokiomarine.kanbanservice.domain.funcionario.Funcionario;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
