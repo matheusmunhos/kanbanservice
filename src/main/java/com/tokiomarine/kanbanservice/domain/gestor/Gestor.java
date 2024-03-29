@@ -1,4 +1,4 @@
-package com.tokiomarine.kanbanservice.gestor;
+package com.tokiomarine.kanbanservice.domain.gestor;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,4 +29,8 @@ public class Gestor {
         this.login = dto.login();
         this.senha = dto.senha();
     }
+
+	public Gestor(Gestor gestor) {
+		
+	}
 }

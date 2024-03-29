@@ -1,7 +1,7 @@
-package com.tokiomarine.kanbanservice.funcionario;
+package com.tokiomarine.kanbanservice.domain.funcionario;
 
 
-import com.tokiomarine.kanbanservice.gestor.Gestor;
+import com.tokiomarine.kanbanservice.domain.gestor.Gestor;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

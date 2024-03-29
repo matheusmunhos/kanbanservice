@@ -1,7 +1,8 @@
-package com.tokiomarine.kanbanservice.tarefa;
+package com.tokiomarine.kanbanservice.domain.tarefa;
 
 
-import com.tokiomarine.kanbanservice.funcionario.Funcionario;
+import com.tokiomarine.kanbanservice.domain.funcionario.Funcionario;
+import com.tokiomarine.kanbanservice.domain.funcionario.GetFuncionarioDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,5 +47,7 @@ public class Tarefa {
     	this.status = dto.status();
     	this.funcionario = dto.funcionario();
     }
-  
+    
+    
+   
 }

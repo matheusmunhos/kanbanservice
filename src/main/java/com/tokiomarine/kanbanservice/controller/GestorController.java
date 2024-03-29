@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tokiomarine.kanbanservice.gestor.Gestor;
-import com.tokiomarine.kanbanservice.gestor.CreateGestorDTO;
-import com.tokiomarine.kanbanservice.gestor.GestorRepository;
+import com.tokiomarine.kanbanservice.domain.gestor.CreateGestorDTO;
+import com.tokiomarine.kanbanservice.domain.gestor.Gestor;
+import com.tokiomarine.kanbanservice.domain.gestor.GetGestorDTO;
+import com.tokiomarine.kanbanservice.repositories.GestorRepository;
 
 @RestController
 @RequestMapping("/gestor")
@@ -29,8 +29,11 @@ public class GestorController {
 	};
 	
 	@GetMapping("/{id}")
-	public Gestor buscarGestor(@PathVariable("id") Long id) {
-	    return repository.findById(id).orElse(null);
+	public GetGestorDTO buscarGestor(@PathVariable Long id) {
+	    var gestor = repository.findById(id).orElse(null);
+	    var gestorResponse = new GetGestorDTO(gestor);
+	    return gestorResponse;
+	    
 	}
 
 
