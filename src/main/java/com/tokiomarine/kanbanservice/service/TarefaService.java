@@ -18,9 +18,9 @@ public class TarefaService {
 	
 	
 	public List<GetTarefaDTO> buscarTarefasPorFuncionarioId(Long funcionarioId) {
-        // Chame o repositório para buscar as tarefas por ID do funcionário
+        
         List<Tarefa> tarefas = repository.findByFuncionarioId(funcionarioId);
-        // Mapeie as tarefas para DTOs e retorne
+        
         return tarefas.stream()
                       .map(GetTarefaDTO::new)
                       .collect(Collectors.toList());
