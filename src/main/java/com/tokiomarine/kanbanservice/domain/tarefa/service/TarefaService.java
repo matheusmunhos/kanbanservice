@@ -1,9 +1,9 @@
-package com.tokiomarine.kanbanservice.service;
+package com.tokiomarine.kanbanservice.domain.tarefa.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tokiomarine.kanbanservice.domain.tarefa.CreateTarefaDTO;
 import org.springframework.stereotype.Service;
 
 import com.tokiomarine.kanbanservice.domain.tarefa.GetTarefaDTO;
@@ -12,10 +12,25 @@ import com.tokiomarine.kanbanservice.repositories.TarefaRepository;
 
 @Service
 public class TarefaService {
-	
-	@Autowired
-	TarefaRepository repository;
-	
+
+
+    private TarefaRepository repository;
+    public TarefaService(TarefaRepository tarefaRepositorysitoryo){
+        this.repository = tarefaRepositorysitoryo;
+    }
+
+
+    public void create(CreateTarefaDTO createTarefaDTO){
+        var tarefa = new Tarefa(createTarefaDTO);
+        repository.save(tarefa);
+    }
+
+    public GetTarefaDTO getTarefa(Long id){
+        var tarefa = repository.findById(id).orElse(null);
+        var tarefaResponse = new GetTarefaDTO(tarefa);
+        return tarefaResponse;
+    }
+
 	
 	public List<GetTarefaDTO> buscarTarefasPorFuncionarioId(Long funcionarioId) {
         

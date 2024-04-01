@@ -1,5 +1,6 @@
 package com.tokiomarine.kanbanservice.controller;
 
+import com.tokiomarine.kanbanservice.domain.gestor.service.GestorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,28 +19,19 @@ import com.tokiomarine.kanbanservice.repositories.GestorRepository;
 @RequestMapping("/gestor")
 public class GestorController {
 
-	@Autowired
-	GestorRepository repository;
+	private GestorService service;
+	public GestorController(GestorService gestorService){
+		this.service = gestorService;
+	}
 
 	@Transactional
 	@PostMapping("/create")
 	public void Cadastrar (@RequestBody CreateGestorDTO createGestorDTO){
-		var gestor = new Gestor(createGestorDTO);
-		repository.save(gestor);
+		service.cadastrar(createGestorDTO);
 	};
 	
 	@GetMapping("/{id}")
 	public GetGestorDTO buscarGestor(@PathVariable Long id) {
-	    var gestor = repository.findById(id).orElse(null);
-	    var gestorResponse = new GetGestorDTO(gestor);
-	    return gestorResponse;
-	    
+	    return service.buscar(id);
 	}
-
-
-
-
-
-
-
 }

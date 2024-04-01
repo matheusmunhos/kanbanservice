@@ -15,37 +15,32 @@ import com.tokiomarine.kanbanservice.domain.tarefa.CreateTarefaDTO;
 import com.tokiomarine.kanbanservice.domain.tarefa.GetTarefaDTO;
 import com.tokiomarine.kanbanservice.domain.tarefa.Tarefa;
 import com.tokiomarine.kanbanservice.repositories.TarefaRepository;
-import com.tokiomarine.kanbanservice.service.TarefaService;
+import com.tokiomarine.kanbanservice.domain.tarefa.service.TarefaService;
 
 @RestController
 @RequestMapping("/tarefa")
 public class TarefaController {
 
-	@Autowired
-	TarefaRepository repository;
-	
-	@Autowired
-	TarefaService tarefaService;
-	
-	
+	private TarefaService service;
+
+
+	public TarefaController(TarefaService tarefaService ){
+	this.service = tarefaService;
+	}
+
 	@Transactional
 	@PostMapping("/create")
 	public void CriarTarefa (@RequestBody CreateTarefaDTO createTarefaDTO) {
-		var tarefa = new Tarefa(createTarefaDTO);
-
-		repository.save(tarefa);
+		service.create(createTarefaDTO);
 	}
-	
-	
+
 	@GetMapping("/{id}")
 	public GetTarefaDTO buscarTarefa(@PathVariable Long id) {
-	    var tarefa = repository.findById(id).orElse(null);
-	    var tarefaResponse = new GetTarefaDTO(tarefa);
-	    return tarefaResponse;
+	    return service.getTarefa(id);
 	}
 	
 	@GetMapping("/funcionario/{funcionarioId}")
     public List<GetTarefaDTO> getTarefasDoFuncionario(@PathVariable Long funcionarioId) {
-        return tarefaService.buscarTarefasPorFuncionarioId(funcionarioId);
+        return service.buscarTarefasPorFuncionarioId(funcionarioId);
     }
 }

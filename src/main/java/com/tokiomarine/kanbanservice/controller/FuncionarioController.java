@@ -1,5 +1,6 @@
 package com.tokiomarine.kanbanservice.controller;
 
+import com.tokiomarine.kanbanservice.domain.funcionario.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,22 +19,21 @@ import com.tokiomarine.kanbanservice.repositories.FuncionarioRepository;
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-	@Autowired
-	FuncionarioRepository repository;
+	private FuncionarioService service;
+
+	public FuncionarioController(FuncionarioService funcionarioService){
+		this.service = funcionarioService;
+	}
 	
 	@Transactional
 	@PostMapping("/create")
 	public void Cadastrar (@RequestBody CreateFuncionarioDTO createFuncionarioDTO) {
-		var funcionario = new Funcionario(createFuncionarioDTO);
-		repository.save(funcionario);
+		service.criar(createFuncionarioDTO);
 	}
 	
 	@GetMapping("/{id}")
 	public GetFuncionarioDTO buscarFuncionario(@PathVariable Long id) {
-	    var funcionario = repository.findById(id).orElse(null);
-	    var funcionarioResponse = new GetFuncionarioDTO(funcionario);
-	    return funcionarioResponse;
-	}
-	
-	
+	    return service.buscar(id);
+    }
+
 }
