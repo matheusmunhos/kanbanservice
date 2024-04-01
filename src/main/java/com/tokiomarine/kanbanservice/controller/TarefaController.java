@@ -32,6 +32,7 @@ public class TarefaController {
 	@PostMapping("/create")
 	public void CriarTarefa (@RequestBody CreateTarefaDTO createTarefaDTO) {
 		var tarefa = new Tarefa(createTarefaDTO);
+
 		repository.save(tarefa);
 	}
 	
