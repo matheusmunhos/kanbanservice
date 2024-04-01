@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tokiomarine.kanbanservice.domain.tarefa.CreateTarefaDTO;
+import com.tokiomarine.kanbanservice.domain.tarefa.UpdateTarefaDTO;
+import com.tokiomarine.kanbanservice.domain.tarefa.exception.TarefaNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.tokiomarine.kanbanservice.domain.tarefa.GetTarefaDTO;
@@ -39,6 +41,19 @@ public class TarefaService {
         return tarefas.stream()
                       .map(GetTarefaDTO::new)
                       .collect(Collectors.toList());
+    }
+
+    public void atualizar (Long id, UpdateTarefaDTO updateTarefaDTO){
+        Tarefa tarefa = repository.findById(id).orElseThrow(TarefaNotFoundException::new);
+        if(!updateTarefaDTO.titulo().isEmpty()) tarefa.setTitulo(updateTarefaDTO.titulo());
+        if(!updateTarefaDTO.descricao().isEmpty()) tarefa.setDescricao(updateTarefaDTO.descricao());
+        if(updateTarefaDTO.status() != null){
+            tarefa.setStatus(updateTarefaDTO.status());
+        }
+        if(updateTarefaDTO.funcionario() != null){
+            tarefa.setFuncionario(updateTarefaDTO.funcionario());
+        }
+        repository.save(tarefa);
     }
 
 }

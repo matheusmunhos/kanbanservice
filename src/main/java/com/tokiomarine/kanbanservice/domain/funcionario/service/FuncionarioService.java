@@ -3,6 +3,7 @@ package com.tokiomarine.kanbanservice.domain.funcionario.service;
 import com.tokiomarine.kanbanservice.domain.funcionario.CreateFuncionarioDTO;
 import com.tokiomarine.kanbanservice.domain.funcionario.Funcionario;
 import com.tokiomarine.kanbanservice.domain.funcionario.GetFuncionarioDTO;
+import com.tokiomarine.kanbanservice.domain.funcionario.exception.FuncionarioNotFoundException;
 import com.tokiomarine.kanbanservice.repositories.FuncionarioRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class FuncionarioService {
     }
 
     public GetFuncionarioDTO buscar(Long id){
-       var funcionario = repository.findById(id).orElse(null);
+       var funcionario = repository.findById(id).orElseThrow(FuncionarioNotFoundException::new);
        var funcionarioResponse = new GetFuncionarioDTO(funcionario);
        return  funcionarioResponse;
     }

@@ -1,5 +1,6 @@
 package com.tokiomarine.kanbanservice.controller;
 
+import com.tokiomarine.kanbanservice.domain.funcionario.GetFuncionarioDTO;
 import com.tokiomarine.kanbanservice.domain.gestor.service.GestorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,8 @@ import com.tokiomarine.kanbanservice.domain.gestor.CreateGestorDTO;
 import com.tokiomarine.kanbanservice.domain.gestor.Gestor;
 import com.tokiomarine.kanbanservice.domain.gestor.GetGestorDTO;
 import com.tokiomarine.kanbanservice.repositories.GestorRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/gestor")
@@ -32,6 +35,12 @@ public class GestorController {
 	
 	@GetMapping("/{id}")
 	public GetGestorDTO buscarGestor(@PathVariable Long id) {
-	    return service.buscar(id);
+
+		return service.buscar(id);
+	}
+
+	@GetMapping("/funcionario/{id}")
+	public List<GetFuncionarioDTO> getFuncionarioPorGestor(@PathVariable Long id){
+	return	service.buscarFuncionarios(id);
 	}
 }
